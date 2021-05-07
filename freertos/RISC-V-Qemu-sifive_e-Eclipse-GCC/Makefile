@@ -1,4 +1,56 @@
 
+#
+#   This Demo could also use rtmake to get built:
+# export ARCH_FLAGS=' -march=rv32imac -mabi=ilp32 -mcmodel=medlow'
+# $ rtmake \
+#     --rtos freertos \
+#     --toolchain gcc \
+#     --arch riscv64 \
+#     --platform hifive1 \
+#     --target rtos.elf \
+#     --source \
+#         freedom-e-sdk/env/start.S \
+#         freedom-e-sdk/env/entry.S \
+#         blinky_demo/main_blinky.c \
+#         freedom-e-sdk/env/freedom-e300-hifive1/*.c \
+#         freedom-e-sdk/libwrap/misc/*.c \
+#         freedom-e-sdk/libwrap/stdlib/*.c \
+#         freedom-e-sdk/libwrap/sys/*.c \
+#         main.c \
+#     --rtos-source \
+#         list.c \
+#         queue.c \
+#         tasks.c \
+#         heap_4.c \
+#         timers.c \
+#     --include \
+#         freedom-e-sdk/env/freedom-e300-hifive1/ \
+#         freedom-e-sdk/include/ \
+#         freedom-e-sdk/env/ \
+#     --cflags \
+#         " $ARCH_FLAGS" \
+#         ' -DDONT_USE_PLIC' \
+#         ' -DportasmHANDLE_INTERRUPT=handle_trap' \
+#         ' -DDONT_USE_M_TIME' \
+#         ' -O0 -g3' \
+#         ' -Wall -Wextra -Wno-unused-parameter' \
+#         ' -ffunction-sections -fdata-sections -fmessage-length=0 -fno-builtin-printf' \
+#     --lflags \
+#         " -T freedom-e-sdk/env/freedom-e300-hifive1/flash.lds $ARCH_FLAGS  --specs=nano.specs" \
+#         ' -Xlinker --gc-sections -Wl,-Map,RTOSDemo.map' \
+#         ' -Xlinker --defsym=__stack_size=350' \
+#         ' -Wl,--start-group -Wl,--end-group' \
+#         ' -Wl,--wrap=__exit -Wl,--wrap=_exit  -Wl,--wrap=_close  -Wl,--wrap=_execve -Wl,--wrap=_fork' \
+#         ' -Wl,--wrap=_free  -Wl,--wrap=_fstat -Wl,--wrap=_getpid -Wl,--wrap=_isatty -Wl,--wrap=_kill' \
+#         ' -Wl,--wrap=_link  -Wl,--wrap=_lseek -Wl,--wrap=_malloc -Wl,--wrap=_open   -Wl,--wrap=_puts' \
+#         ' -Wl,--wrap=_read  -Wl,--wrap=_sbrk  -Wl,--wrap=_stat   -Wl,--wrap=_times  -Wl,--wrap=_unlink' \
+#         ' -Wl,--wrap=_wait  -Wl,--wrap=_write -Wl,--wrap=close   -Wl,--wrap=execve  -Wl,--wrap=fork' \
+#         ' -Wl,--wrap=free   -Wl,--wrap=fstat  -Wl,--wrap=getpid  -Wl,--wrap=isatty  -Wl,--wrap=kill' \
+#         ' -Wl,--wrap=link   -Wl,--wrap=lseek  -Wl,--wrap=malloc  -Wl,--wrap=open    -Wl,--wrap=puts' \
+#         ' -Wl,--wrap=read   -Wl,--wrap=sbrk   -Wl,--wrap=stat    -Wl,--wrap=times   -Wl,--wrap=unlink' \
+#         ' -Wl,--wrap=wait   -Wl,--wrap=write'
+#
+
 CC = riscv64-unknown-elf-gcc
 
 INCLUDES = -I . \
